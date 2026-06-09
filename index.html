@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrousel By the Beach | Jewelry & Home Goods</title>
+  <meta name="description" content="Carrousel By the Beach — a modern, eclectic jewelry and home goods shop in Lincoln City, Oregon." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1115;
+      --panel:#161a22;
+      --panel-2:#1c2230;
+      --text:#f5f7fb;
+      --muted:#b9c0d1;
+      --line:rgba(255,255,255,.09);
+      --brand:#7dd3fc;
+      --brand-2:#c084fc;
+      --accent:#f59e0b;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(125,211,252,.18), transparent 50%),
+        radial-gradient(1000px 700px at 90% 0%, rgba(192,132,252,.14), transparent 45%),
+        linear-gradient(180deg, #090b10 0%, #111522 35%, #0c1018 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{width:min(1180px, calc(100% - 32px)); margin:0 auto}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(16px);
+      background:rgba(8,10,16,.62);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+      gap:20px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px; min-width:0;
+    }
+    .mark{
+      width:44px; height:44px; border-radius:14px;
+      background:linear-gradient(135deg, rgba(125,211,252,.95), rgba(192,132,252,.95));
+      box-shadow:0 14px 30px rgba(125,211,252,.18);
+      display:grid; place-items:center; color:#08111e; font-weight:900;
+    }
+    .brand h1{
+      margin:0; font-size:1rem; line-height:1.1;
+      letter-spacing:.2px;
+    }
+    .brand p{
+      margin:2px 0 0; color:var(--muted); font-size:.86rem;
+    }
+    .menu{display:flex; gap:18px; flex-wrap:wrap; justify-content:flex-end}
+    .menu a{color:var(--muted); font-weight:600; font-size:.95rem}
+    .menu a:hover{color:var(--text)}
+    .hero{
+      padding:44px 0 24px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .hero-card, .info-card, .section-card, .gallery-card{
+      background:linear-gradient(180deg, rgba(22,26,34,.92), rgba(13,16,24,.92));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-card{
+      overflow:hidden;
+      position:relative;
+      min-height:640px;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(9,11,16,.10), rgba(9,11,16,.85) 82%);
+    }
+    .hero-img{
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:cover;
+      transform:scale(1.03);
+      filter:saturate(1.08) contrast(1.02);
+    }
+    .hero-content{
+      position:absolute; inset:auto 0 0 0; z-index:1;
+      padding:28px;
+      display:grid;
+      gap:18px;
+    }
+    .eyebrow{
+      display:inline-flex; width:max-content;
+      padding:8px 12px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      color:#fff;
+      font-size:.84rem; font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      backdrop-filter: blur(12px);
+    }
+    .hero h2{
+      margin:0;
+      font-size:clamp(2.3rem, 5vw, 4.9rem);
+      line-height:1;
+      letter-spacing:-.05em;
+      max-width:10ch;
+    }
+    .hero p{
+      margin:0;
+      max-width:62ch;
+      color:#d7dcee;
+      font-size:1.02rem;
+    }
+    .cta-row{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:2px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:14px 18px;
+      border-radius:16px;
+      font-weight:700;
+      border:1px solid transparent;
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:#08111e;
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.12);
+      color:var(--text);
+    }
+    .hero-stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .stat{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .stat strong{display:block; font-size:1.1rem; margin-bottom:4px}
+    .stat span{color:var(--muted); font-size:.92rem}
+    .side{
+      display:grid;
+      gap:22px;
+    }
+    .info-card{
+      padding:24px;
+    }
+    .info-card h3, .section-title{
+      margin:0 0 10px;
+      font-size:1.45rem;
+      letter-spacing:-.03em;
+    }
+    .info-card p{margin:0; color:var(--muted)}
+    .pill-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+    .pill{
+      padding:14px 14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .pill b{display:block; margin-bottom:4px}
+    .pill small{color:var(--muted)}
+    .section{
+      padding:18px 0 10px;
+    }
+    .section-card{
+      padding:24px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    .feature{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      min-height:160px;
+    }
+    .feature .icon{
+      width:42px; height:42px; border-radius:14px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(125,211,252,.18), rgba(192,132,252,.18));
+      border:1px solid rgba(255,255,255,.10);
+      margin-bottom:12px;
+      font-size:1.1rem;
+    }
+    .feature h4{margin:0 0 6px; font-size:1.05rem}
+    .feature p{margin:0; color:var(--muted); font-size:.95rem}
+    .gallery{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:16px;
+    }
+    .gallery-card{
+      overflow:hidden;
+      position:relative;
+      min-height:260px;
+    }
+    .gallery-card img{
+      width:100%; height:100%; object-fit:cover;
+      display:block;
+      transition:transform .35s ease;
+    }
+    .gallery-card:hover img{transform:scale(1.05)}
+    .gallery-card .label{
+      position:absolute; left:14px; bottom:14px;
+      padding:10px 12px;
+      background:rgba(8,10,16,.60);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      backdrop-filter: blur(10px);
+      font-size:.9rem;
+      font-weight:600;
+    }
+    .hours{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    .hours-list{
+      display:grid;
+      gap:10px;
+      margin:0;
+    }
+    .row{
+      display:flex; justify-content:space-between; gap:16px;
+      padding:12px 14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+    }
+    .row span:first-child{color:#fff; font-weight:600}
+    .row span:last-child{color:var(--muted)}
+    .contact-card{
+      padding:24px;
+      display:grid;
+      gap:12px;
+    }
+    .contact-item{
+      display:flex; align-items:flex-start; gap:12px;
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .contact-item strong{display:block; margin-bottom:2px}
+    .contact-item span{color:var(--muted)}
+    .contact-item .dot{
+      width:38px; height:38px; border-radius:13px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(245,158,11,.18), rgba(125,211,252,.12));
+      border:1px solid rgba(255,255,255,.08);
+      flex:0 0 auto;
+    }
+    footer{
+      padding:26px 0 34px;
+      color:var(--muted);
+      text-align:center;
+      font-size:.95rem;
+    }
+    .muted{color:var(--muted)}
+    @media (max-width: 980px){
+      .hero-grid, .hours, .grid-3, .gallery{grid-template-columns:1fr}
+      .hero-card{min-height:560px}
+      .hero-stats{grid-template-columns:1fr}
+      .pill-grid{grid-template-columns:1fr}
+      .menu{display:none}
+    }
+    @media (max-width: 560px){
+      .wrap{width:min(100% - 20px, 1180px)}
+      .hero-content, .info-card, .section-card, .contact-card{padding:18px}
+      .hero h2{max-width:100%}
+      .hero-card{min-height:520px}
+      .btn{width:100%}
+      .cta-row{display:grid}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="mark">CB</div>
+        <div>
+          <h1>Carrousel By the Beach</h1>
+          <p>Jewelry store · Home goods store</p>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#hours">Hours</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="hero-card">
+          <img class="hero-img" src="assets/hero-storefront.jpg" alt="Carrousel By the Beach storefront at night with colorful lights" />
+          <div class="hero-content">
+            <span class="eyebrow">Coastal treasures · curated finds</span>
+            <div>
+              <h2>Modern gifts, jewelry, and home décor with beachside charm.</h2>
+              <p>Discover an eclectic collection of statement pieces, vintage-inspired accents, artful home goods, and unique treasures in the heart of Lincoln City.</p>
+            </div>
+            <div class="cta-row">
+              <a class="btn primary" href="tel:+15419942264">Call +1 (541) 994-2264</a>
+              <a class="btn secondary" href="mailto:lsantiques98@gmail.com">Email Us</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><strong>Lincoln City, OR</strong><span>1615 NW U.S. 101</span></div>
+              <div class="stat"><strong>Open 6 days</strong><span>Closed Tuesday</span></div>
+              <div class="stat"><strong>Curated style</strong><span>Jewelry · décor · gifts</span></div>
+            </div>
+          </div>
+        </article>
+
+        <aside class="side">
+          <section class="info-card" id="about">
+            <h3>About the shop</h3>
+            <p>Carrousel By the Beach is a warm, visually rich shopping destination filled with coastal personality. The space blends jewelry, home goods, statement décor, and collectible finds into a memorable boutique experience.</p>
+            <div class="pill-grid">
+              <div class="pill"><b>Style</b><small>Modern eclectic</small></div>
+              <div class="pill"><b>Specialty</b><small>Giftable treasures</small></div>
+              <div class="pill"><b>Feel</b><small>Artful and inviting</small></div>
+              <div class="pill"><b>Location</b><small>Beach-town retail</small></div>
+            </div>
+          </section>
+
+          <section class="contact-card" id="contact">
+            <h3 class="section-title">Visit & contact</h3>
+            <div class="contact-item">
+              <div class="dot">📍</div>
+              <div>
+                <strong>Shop address</strong>
+                <span>1615 NW U.S. 101, Lincoln City, OR 97367, United States</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="dot">✉️</div>
+              <div>
+                <strong>Email</strong>
+                <span><a href="mailto:lsantiques98@gmail.com">lsantiques98@gmail.com</a></span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="dot">☎️</div>
+              <div>
+                <strong>Mobile</strong>
+                <span><a href="tel:+15419942264">+1 541-994-2264</a></span>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <h3 class="section-title">Why shoppers love it</h3>
+        <p class="muted">A modern layout, rich lighting, and carefully selected displays create a destination that feels both boutique and gallery-like.</p>
+        <div class="grid-3">
+          <div class="feature">
+            <div class="icon">💎</div>
+            <h4>Jewelry & statement pieces</h4>
+            <p>Elegant, eye-catching accessories for gifting or everyday style.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🏠</div>
+            <h4>Home goods & décor</h4>
+            <p>Decorative accents that bring warmth, texture, and personality to any room.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🎁</div>
+            <h4>Unique gifts</h4>
+            <p>Distinctive finds for collectors, beach visitors, and local shoppers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-card">
+        <h3 class="section-title">Shop gallery</h3>
+        <p class="muted">Real photos from inside and outside the shop are featured below.</p>
+        <div class="gallery">
+          <figure class="gallery-card">
+            <img src="assets/holiday-window.jpg" alt="Festive holiday display with Christmas tree and Santa figurines" />
+            <figcaption class="label">Festive display</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/sailboats-wall.jpg" alt="Wall display with decorative sailboat art and nautical accents" />
+            <figcaption class="label">Nautical décor</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/clocks-wall.jpg" alt="Wall of decorative cuckoo clocks" />
+            <figcaption class="label">Collectible clocks</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/cockatoo-art.jpg" alt="White cockatoo decorative sculpture on driftwood" />
+            <figcaption class="label">Artful accents</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/glass-art.jpg" alt="Glass art and framed artwork in the shop interior" />
+            <figcaption class="label">Glass & art pieces</figcaption>
+          </figure>
+          <figure class="gallery-card">
+            <img src="assets/display-case.jpg" alt="Glass display case filled with curated shop items and lamps" />
+            <figcaption class="label">Curated displays</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hours">
+      <div class="section-card">
+        <h3 class="section-title">Opening hours</h3>
+        <div class="hours">
+          <div>
+            <div class="hours-list">
+              <div class="row"><span>Saturday</span><span>11 AM – 6 PM</span></div>
+              <div class="row"><span>Sunday</span><span>11 AM – 5 PM</span></div>
+              <div class="row"><span>Monday</span><span>11 AM – 5 PM</span></div>
+              <div class="row"><span>Tuesday</span><span>Closed</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="hours-list">
+              <div class="row"><span>Wednesday</span><span>11 AM – 5 PM</span></div>
+              <div class="row"><span>Thursday</span><span>11 AM – 5 PM</span></div>
+              <div class="row"><span>Friday</span><span>11 AM – 6 PM</span></div>
+              <div class="row"><span>Best time to visit</span><span>Afternoons & weekends</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Carrousel By the Beach · 1615 NW U.S. 101, Lincoln City, OR 97367 · lsantiques98@gmail.com · +1 541-994-2264</p>
+    </div>
+  </footer>
+</body>
+</html>
